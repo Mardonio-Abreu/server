@@ -1,11 +1,10 @@
-import express from  'express';
-import pkg from '../classes/productManager.cjs';
-
-const { ProductManager } = pkg;
+const express = require('express');
 const app = express();
 
+const ProductManager = require('../classes/productManager');
 
+const newCatalogue = new ProductManager();
 
-app.get('/saludo', (req, res)=>{res.send("Surprise MotherFather")})
+app.get('/saludo', (req, res)=>{res.send("Surprise MotherFather!")});
 
-app.listen(8080, () => console.log("Surprise MotherFather on port 8080!"))
+app.listen(8080, () => console.log("Surprise MotherFather on port 8080!"));

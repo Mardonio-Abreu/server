@@ -1,5 +1,6 @@
 // class that manages a set of products.
 
+const fs = require('fs');
 class ProductManager{
     constructor(){
 
@@ -10,7 +11,7 @@ class ProductManager{
     }
 
           getCatalogue (fileName){
-            const fs = require('fs');
+            
             if(fs.existsSync(this.path + fileName)){
                 let catalogueJSON = fs.readFileSync(fileName, 'utf-8');
                 let catalogue = JSON.parse(catalogueJSON);
@@ -23,7 +24,7 @@ class ProductManager{
         }
 
         createfile (fileName) {
-            const fs = require('fs');
+            
             let catalogue = [];
             const jsonData = JSON.stringify(catalogue, null, 2);
             fs.writeFileSync(this.path + fileName, jsonData);
@@ -31,7 +32,7 @@ class ProductManager{
 
                        
         addProduct (title, description, price, thumbnail, code, stock) {
-            const fs = require('fs');
+            
         
 
         try { if(title.length == 0 || description.length == 0 || price.length == 0 || thumbnail.length == 0 || code.length == 0 || stock.length == 0){console.log("Surprise MotherFather!");}
@@ -80,7 +81,7 @@ class ProductManager{
         }
 
         getProductsById (id) {
-            const fs = require('fs');
+            
 
             let catalogue = this.getCatalogue(this.path + this.file); 
             
@@ -103,7 +104,7 @@ class ProductManager{
         }
 
         deleteProduct (id){
-            const fs = require('fs');
+            
         
             let catalogue = this.getCatalogue(this.path + this.file); 
         
@@ -121,7 +122,7 @@ class ProductManager{
         }
 
         updateProduct(id, field, fieldValue){
-            const fs = require('fs');
+            
             let catalogue = this.getCatalogue(this.path + this.file);
             const index = catalogue.findIndex(product => product.id === id);
             if(index !== -1){
@@ -140,31 +141,7 @@ class ProductManager{
 
         }
 
-    /* console.log("--------------TESTS-------------------");
-
-    const newProduct = new ProductManager;
-    newProduct.getProducts();
-    newProduct.addProduct("producto prueba",
-        "Este es un producto prueba",
-        200,
-        "Sin imagen",
-        "abc123",
-        25
-        );
-    newProduct.getProducts();
-    console.log("Get products by id");
-    newProduct.getProductsById(1);
-    console.log("Get products by wrong id");
-    newProduct.getProductsById(3);
-    newProduct.updateProduct(1, "description", "Se cambio la descripción");
-    newProduct.getProductsById(1);
-    newProduct.deleteProduct(3);
-    newProduct.deleteProduct(1);
-    newProduct.getProducts(); */
-    
-    
-
-
+  module.exports = ProductManager;
 
 
         
