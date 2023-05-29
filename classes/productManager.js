@@ -6,8 +6,7 @@ class ProductManager{
 
         this.file = "data.json";
         this.path = "./";
-        this.createfile(this.file);
-        
+               
     }
 
           getCatalogue (fileName){
@@ -77,7 +76,7 @@ class ProductManager{
         
         getProducts () {
             let catalogue = this.getCatalogue(this.path + this.file);
-            return console.log(catalogue);
+            return catalogue;
         }
 
         getProductsById (id) {
@@ -87,19 +86,23 @@ class ProductManager{
             
             let flag = false;
 
+            let item;
+
             catalogue.map((product)=>{
                                              
                 if(product.id === id){
                     flag = true;
-                    console.log(product);
+                    item = product;
                     }
                 
             }
             )
 
             if(!flag){
-                        console.log("Product not found!");
+                        item = "Product not found!";
             }
+
+            return item;
             
         }
 
