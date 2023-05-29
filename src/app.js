@@ -16,5 +16,10 @@ catalogue.addProduct("Black panther mug", "black panther mug", 3.50, "img/black-
 catalogue.addProduct("Tree mug", "brown mug", 3.50, "img/tree-mug.jpeg", "btm", 12);
 catalogue.addProduct("Red hood mug", "red mug", 3.50, "img/red-hood-mug.jpeg", "rhm", 12);
 
-app.get('/saludo', (req, res)=>{res.send("Surprise MotherFather!")});
+app.get('/products', (req, res)=>{res.send(catalogue.getProducts())});
+
+app.get('/surprise', (req, res)=>{res.send("Surprise MotherFather")});
+
+
+
 
