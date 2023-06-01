@@ -8,7 +8,7 @@ class ProductManager{
         this.path = "./";
                
     }
-
+    
           getCatalogue (fileName){
             
             if(fs.existsSync(this.path + fileName)){
@@ -17,23 +17,22 @@ class ProductManager{
                 return catalogue;
             }else{
                 console.log("File not found!");
-                
-            }
-
+             }}
         }
 
-        createfile (fileName) {
+       createfile (fileName) {
             
+        
             let catalogue = [];
             const jsonData = JSON.stringify(catalogue, null, 2);
             fs.writeFileSync(this.path + fileName, jsonData);
             }
+        
 
                        
         addProduct (title, description, price, thumbnail, code, stock) {
-            
-        
 
+        
         try { if(title.length == 0 || description.length == 0 || price.length == 0 || thumbnail.length == 0 || code.length == 0 || stock.length == 0){console.log("Surprise MotherFather!");}
             }
 
@@ -74,8 +73,8 @@ class ProductManager{
                 
         }                          
         
-        getProducts () {
-            let catalogue = this.getCatalogue(this.path + this.file);
+        getProducts (file) {
+            let catalogue = this.getCatalogue(file);
             return catalogue;
         }
 

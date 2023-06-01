@@ -8,31 +8,40 @@ app.listen(PORT, ()=>{'Server running on port 8080 UwU', PORT});
 const ProductManager = require('../classes/productManager');
 
 const catalogue = new ProductManager()
-app.get('/products', (req, res)=>{
+app.get('/products', async(req, res)=>{
     let limit = req.query.limit;
     let num = parseInt(limit);
     let items = [];
     
+    try{
     if(num > 0 && num <=10){
         for(let i = 1; i < num + 1; i++){
-            items.push(catalogue.getProductsById(i));
+            items.push(await catalogue.getProductsById(i));
         }
     }else if (num <= 0 || num > 10)
         {
         items = "Not a valid limit!";
     }else{
-        items = catalogue.getProducts();
+        items = await catalogue.getProducts(FILE);
         
     }
 
     res.send(items);
+}catch(error){
+    console.error("The database couldn't be read", error);
+}
+}
 
-});
+);
 
-app.get('/products/:id', (req, res)=>{
-    let str = req.params.id;
+app.get('/products/:pid', async (req, res)=>{
+    try{
+    let str = req.params.pid;
     let num = parseInt(str);
-    res.send(catalogue.getProductsById(num))}
+    res.send(catalogue.getProductsById(num))}catch (error){
+        console.error("The database couldn't be read", error);
+    }
+}
     );
 
 
