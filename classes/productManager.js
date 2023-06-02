@@ -18,7 +18,7 @@ class ProductManager{
             }else{
                 console.log("File not found!");
              }}
-        }
+
 
        createfile (fileName) {
             
@@ -73,8 +73,8 @@ class ProductManager{
                 
         }                          
         
-        getProducts (file) {
-            let catalogue = this.getCatalogue(file);
+        getProducts (fileName) {
+            let catalogue = this.getCatalogue(fileName);
             return catalogue;
         }
 
