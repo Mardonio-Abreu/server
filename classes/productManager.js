@@ -1,18 +1,17 @@
 // class that manages a set of products.
 
 const fs = require('fs');
-class ProductManager{
-    constructor(){
+class ProductManager {
+    constructor(file){
 
-        this.file = "data.json";
-        this.path = "./";
+        this.path = file;
                
     }
     
-          getCatalogue (fileName){
+          getCatalogue (){
             
-            if(fs.existsSync(this.path + fileName)){
-                let catalogueJSON = fs.readFileSync(fileName, 'utf-8');
+            if(fs.existsSync(this.path)){
+                let catalogueJSON = fs.readFileSync(this.path, 'utf-8');
                 let catalogue = JSON.parse(catalogueJSON);
                 return catalogue;
             }else{
@@ -20,12 +19,12 @@ class ProductManager{
              }}
 
 
-       createfile (fileName) {
+       createfile () {
             
         
             let catalogue = [];
             const jsonData = JSON.stringify(catalogue, null, 2);
-            fs.writeFileSync(this.path + fileName, jsonData);
+            fs.writeFileSync(this.path, jsonData);
             }
         
 
@@ -44,7 +43,7 @@ class ProductManager{
 
         let flag = true;
 
-        let catalogue = this.getCatalogue(this.path + this.file);
+        let catalogue = this.getCatalogue(this.path);
 
         catalogue.map((product)=>{
             if (product.code === code){
@@ -67,21 +66,21 @@ class ProductManager{
 
         catalogue.push({title, description, price, thumbnail, code, stock, id})
         const jsonData = JSON.stringify(catalogue, null, 2);
-        fs.writeFileSync(this.path + this.file, jsonData);
+        fs.writeFileSync(this.path, jsonData);
         console.log("File updated successfully!")
         }
                 
         }                          
         
-        getProducts (fileName) {
-            let catalogue = this.getCatalogue(fileName);
+        getProducts () {
+            let catalogue = this.getCatalogue(this.path);
             return catalogue;
         }
 
         getProductsById (id) {
             
 
-            let catalogue = this.getCatalogue(this.path + this.file); 
+            let catalogue = this.getCatalogue(this.path); 
             
             let flag = false;
 
@@ -108,14 +107,14 @@ class ProductManager{
         deleteProduct (id){
             
         
-            let catalogue = this.getCatalogue(this.path + this.file); 
+            let catalogue = this.getCatalogue(this.path); 
         
             const index = catalogue.findIndex(product => product.id === id);
 
             if (index !== -1){
                 let newCatalogue = [...catalogue.slice(0, index), ...catalogue.slice(index + 1)];
                 const jsonData = JSON.stringify(newCatalogue, null, 2);
-                fs.writeFileSync(this.path + this.file, jsonData);
+                fs.writeFileSync(this.path, jsonData);
                 console.log("Product erased!");
             }else{
                 console.log("product not found!");
@@ -125,13 +124,13 @@ class ProductManager{
 
         updateProduct(id, field, fieldValue){
             
-            let catalogue = this.getCatalogue(this.path + this.file);
+            let catalogue = this.getCatalogue(this.path);
             const index = catalogue.findIndex(product => product.id === id);
             if(index !== -1){
                                             
                 catalogue[index][field] = fieldValue;
                 const jsonData = JSON.stringify(catalogue, null, 2);
-                fs.writeFileSync(this.path + this.file, jsonData);
+                fs.writeFileSync(this.path, jsonData);
                 console.log("Product updated!");
 
             }else{

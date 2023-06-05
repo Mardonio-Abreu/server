@@ -8,7 +8,7 @@ app.listen(PORT, ()=>{'Server running on port 8080 UwU', PORT});
 
 const ProductManager = require('../classes/productManager');
 
-const catalogue = new ProductManager()
+const catalogue = new ProductManager(FILE)
 app.get('/products', async(req, res)=>{
     let limit = req.query.limit;
     let num = parseInt(limit);
