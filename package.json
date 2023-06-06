@@ -5,7 +5,7 @@
   "main": "app.js",
   
   "scripts": {
-    "start": "nodemon src/app.js"
+    "start": "nodemon --ext js src/app.js"
   },
   "keywords": [],
   "author": "Mardonio Abreu",

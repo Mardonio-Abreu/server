@@ -2,13 +2,11 @@
 const express = require('express');
 const app = express();
 const PORT = '8080';
-const FILE = './data.json';
-
-app.listen(PORT, ()=>{'Server running on port 8080 UwU', PORT});
+const FILE = "./data.json";
 
 const ProductManager = require('../classes/productManager');
 
-const catalogue = new ProductManager(FILE)
+const catalogue = new ProductManager(FILE);
 app.get('/products', async(req, res)=>{
     let limit = req.query.limit;
     let num = parseInt(limit);
@@ -44,6 +42,8 @@ app.get('/products/:pid', async (req, res)=>{
     }
 }
     );
+
+    app.listen(PORT, ()=>{'Server running on port 8080 UwU', PORT});
 
 
 

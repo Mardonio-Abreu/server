@@ -1,14 +1,25 @@
 // class that manages a set of products.
 
 const fs = require('fs');
-class ProductManager {
+
+class ProductManager  {
+
     constructor(file){
 
         this.path = file;
-               
+        //this.createFile();
+        
     }
     
-          getCatalogue (){
+    createFile(){
+            
+        const catalogue = [];
+        const jsonData = JSON.stringify(catalogue, null, 2);
+        fs.writeFileSync(this.path, jsonData);
+        
+    }      
+           
+    getCatalogue(){
             
             if(fs.existsSync(this.path)){
                 let catalogueJSON = fs.readFileSync(this.path, 'utf-8');
@@ -16,20 +27,9 @@ class ProductManager {
                 return catalogue;
             }else{
                 console.log("File not found!");
-             }}
-
-
-       createfile () {
-            
-        
-            let catalogue = [];
-            const jsonData = JSON.stringify(catalogue, null, 2);
-            fs.writeFileSync(this.path, jsonData);
-            }
-        
-
-                       
-        addProduct (title, description, price, thumbnail, code, stock) {
+    }}
+    
+    addProduct (title, description, price, thumbnail, code, stock) {
 
         
         try { if(title.length == 0 || description.length == 0 || price.length == 0 || thumbnail.length == 0 || code.length == 0 || stock.length == 0){console.log("Surprise MotherFather!");}
@@ -70,14 +70,14 @@ class ProductManager {
         console.log("File updated successfully!")
         }
                 
-        }                          
+    }                          
         
-        getProducts () {
+    getProducts(){
             let catalogue = this.getCatalogue(this.path);
             return catalogue;
-        }
+    }
 
-        getProductsById (id) {
+    getProductsById(id){
             
 
             let catalogue = this.getCatalogue(this.path); 
@@ -102,9 +102,9 @@ class ProductManager {
 
             return item;
             
-        }
+    }
 
-        deleteProduct (id){
+    deleteProduct (id){
             
         
             let catalogue = this.getCatalogue(this.path); 
@@ -120,9 +120,9 @@ class ProductManager {
                 console.log("product not found!");
             }
        
-        }
+    }
 
-        updateProduct(id, field, fieldValue){
+    updateProduct(id, field, fieldValue){
             
             let catalogue = this.getCatalogue(this.path);
             const index = catalogue.findIndex(product => product.id === id);
@@ -137,11 +137,9 @@ class ProductManager {
                 console.log("Product not found!");
             }
 
-        }
-    
+    }
 
-        }
-
+}
   module.exports = ProductManager;
 
 
