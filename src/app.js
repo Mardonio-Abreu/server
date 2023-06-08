@@ -45,7 +45,4 @@ app.get('/products/:pid', async (req, res)=>{
 
     app.listen(PORT, ()=>{
         console.log(`The server is running in port ${PORT}`);
-
-
-
-
+});
