@@ -1,4 +1,4 @@
-// class that manages a set of products.
+// class that manages a set of products product manager.
 
 const fs = require('fs');
 

@@ -1,3 +1,4 @@
+//products
 catalogue.createfile(FILE);
 
 catalogue.addProduct("Smurf mug", "blue mug", 3.50, "img/smurf-mug.jpeg", "bsm", 12);
